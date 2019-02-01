@@ -1,3 +1,5 @@
+// ПАВЛОВ АЛЕКСАНДР
+
 #include <windows.h>
 #include <stdio.h>
 #include <TCHAR.h>
@@ -6,6 +8,8 @@
 static int count;
 static long long size;
  
+
+
 void dfs() {
     // начинает перебор файлов и папок в текущей папке
     // 1) папки . и .. пропускаем
