@@ -22,16 +22,26 @@ void dfs() {
  
     hFind = FindFirstFile(L"*", &res);   // найти первый файл
  
+	//strcmp("a",s)
     do {
-        count++; // некоторые файлы не считаются??
+        if(wcscmp(res.cFileName, L".")==0 || 
+			wcscmp(res.cFileName, L"..")==0)
+			continue;
+
+		 // некоторые файлы не считаются??
         _tprintf(TEXT("file #%d is <%s>\n"), count, res.cFileName);
  
-        // if (...) { // если это подпапка
+        if ((res.dwFileAttributes & 16) != 0) { // если это подпапка
         // 	здесь будет обход в глубину
-        // }
-        // else {// это файл
-        // size+=res....
-        // }
+			SetCurrentDirectory(res.cFileName);
+			dfs();
+			SetCurrentDirectory(L"..");
+        }
+        else 
+			 { 
+		size+=res.nFileSizeLow;
+		 count++;
+         }
     } while (FindNextFile(hFind, &res) != 0);
     FindClose(hFind);
 }
